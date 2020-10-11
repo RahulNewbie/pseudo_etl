@@ -3,7 +3,7 @@ import psycopg2
 
 class DbModel(object):
     """ DbModel
-        Takes care of storing and loading data structures
+        Takes care of storing and loading records
         to PostgreSQL database
     """
     def __init__(self, configuration):
@@ -18,8 +18,6 @@ class DbModel(object):
             self.connection = None
 
     def __enter__(self):
-        self._prepare_connection()
-        self._create_table()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -65,7 +63,7 @@ class DbModel(object):
             # Preparing SQL queries to INSERT a record into the database.
             cursor.execute('''INSERT INTO ETL(key, value, timestamp) 
             VALUES (%s,%s,%s)''', (data['key'], data['value'], data['ts'],))
-            # Commit your changes in the database
+            # Commit changes in the database
             self.connection.commit()
             print("Records inserted........")
         except (Exception, psycopg2.DatabaseError) as error:

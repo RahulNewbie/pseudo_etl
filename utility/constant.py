@@ -15,3 +15,7 @@ class PATH:
     DB_INI_PATH = str(os.getcwd()) + "/database.ini"
     FILE_PATH = str(os.getcwd()) + "/file.json"
 
+
+class PARAM:
+    SOURCE = 1
+    SINK = 2

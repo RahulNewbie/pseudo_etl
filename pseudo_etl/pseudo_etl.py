@@ -19,9 +19,11 @@ class PseudoETL:
         try:
             if self.sink == SinkMode.CONSOLE:
                 if self.data is not None:
+                    # Print the data in console
                     print(self.data)
             if self.sink == SinkMode.DATABASE:
                 if self.data is not None:
+                    # Insert the data in Postgresql
                     self.database.insert_data(self.data)
 
         except (Exception, OSError) as error:
@@ -30,9 +32,11 @@ class PseudoETL:
     def start_source(self):
         try:
             if self.source == SourceMode.SIMULATOR:
+                # Simulate data to sink
                 self.data = json.loads(data_generator())
                 self.start_sink()
             if self.source == SourceMode.FILE:
+                # Read the file and sink
                 for json_data in read_json(self.file_path):
                     self.data = json_data
                     self.start_sink()

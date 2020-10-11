@@ -1,7 +1,7 @@
 import sys
 
 from pseudo_etl.pseudo_etl import PseudoETL
-from utility.constant import PATH
+from utility.constant import PATH, PARAM
 
 
 if __name__ == "__main__":
@@ -9,8 +9,8 @@ if __name__ == "__main__":
     etl = PseudoETL(
         PATH.DB_INI_PATH,
         PATH.FILE_PATH,
-        sys.argv[1],
-        sys.argv[2]
+        sys.argv[PARAM.SOURCE],
+        sys.argv[PARAM.SINK]
     )
     # Run the application
     etl.run()
