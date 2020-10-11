@@ -1,8 +1,9 @@
 Welcome to Pseudo ETL Project
 
-***Used Python Version***
+***Used Python and pip Version***
 
 python 3.8
+pip version 19.3.1
 
 ***Install Dependency***
 
