@@ -1,25 +1,16 @@
+import sys
+
 from pseudo_etl.pseudo_etl import PseudoETL
-from utility.constant import SourceMode, SinkMode, PATH
+from utility.constant import PATH
 
 
 if __name__ == "__main__":
+    # Create object for the pseudo_etl class
     etl = PseudoETL(
         PATH.DB_INI_PATH,
-        PATH.FILE_PATH
+        PATH.FILE_PATH,
+        sys.argv[1],
+        sys.argv[2]
     )
-    # Source is simulator and Sink is Console
-    etl.run(
-        SourceMode.SIMULATOR,
-        SinkMode.CONSOLE
-    )
-    # Source is simulator and Sink is Database
-    etl.run(
-        SourceMode.SIMULATOR,
-        SinkMode.DATABASE
-    )
-    # Source is File and Sink is Database
-    etl.run(
-        SourceMode.FILE,
-        SinkMode.DATABASE
-    )
-
+    # Run the application
+    etl.run()

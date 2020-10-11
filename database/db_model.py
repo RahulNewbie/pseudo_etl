@@ -1,5 +1,4 @@
 import psycopg2
-from database.config import config
 
 
 class DbModel(object):
@@ -11,7 +10,6 @@ class DbModel(object):
         self.config = configuration
         self.connection = None
         self._prepare_connection()
-        #self._create_database()
         self._create_table()
 
     def __del__(self):
@@ -21,7 +19,6 @@ class DbModel(object):
 
     def __enter__(self):
         self._prepare_connection()
-        self._create_database()
         self._create_table()
         return self
 
@@ -35,48 +32,41 @@ class DbModel(object):
         """
         try:
             if self.connection is None or self.connection.closed:
-                print(self.config)
                 self.connection = psycopg2.connect(**self.config)
             print("Database connected successfully........")
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
-    def _create_database(self):
-        self.connection.autocommit = True
-        # Creating a cursor object using the cursor() method
-        cursor = self.connection.cursor()
-        # Preparing query to create a database
-        sql = '''CREATE database etldb''';
-        # Creating a database
-        cursor.execute(sql)
-        print("Database created successfully........")
-
     def _create_table(self):
-        # Creating a cursor object using the cursor() method
-        cursor = self.connection.cursor()
-        # Doping ETL table if already exists.
-        cursor.execute("DROP TABLE IF EXISTS ETL")
+        """ Creates a new table if table doesn't exists
+        """
+        try:
+            # Creating a cursor object using the cursor() method
+            cursor = self.connection.cursor()
 
-        # Creating table as per requirement
-        sql = '''CREATE TABLE ETL(
-            key VARCHAR(255) PRIMARY KEY,
-            value VARCHAR(255) NOT NULL,
-            timestamp VARCHAR(255) NOT NULL
-        )'''
-        cursor.execute(sql)
-        print("Table created successfully........")
+            # Creating table as per requirement
+            sql = '''CREATE TABLE IF NOT EXISTS ETL(
+                key VARCHAR(255) PRIMARY KEY,
+                value VARCHAR(255) NOT NULL,
+                timestamp VARCHAR(255) NOT NULL
+            )'''
+            cursor.execute(sql)
+            print("Table created successfully........")
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
-    def insert_data(self, key, value, ts):
-        # Setting auto commit false
-        #self.connection.autocommit = True
+    def insert_data(self, data):
+        """ Inserts a record in the database
+        """
+        try:
+            # Creating a cursor object using the cursor() method
+            cursor = self.connection.cursor()
 
-        # Creating a cursor object using the cursor() method
-        cursor = self.connection.cursor()
-
-        # Preparing SQL queries to INSERT a record into the database.
-        cursor.execute('''INSERT INTO ETL(key, value, timestamp) 
-        VALUES (%s,%s,%s)''', (key, value, ts,))
-        # Commit your changes in the database
-        self.connection.commit()
-        print("Records inserted........")
-
+            # Preparing SQL queries to INSERT a record into the database.
+            cursor.execute('''INSERT INTO ETL(key, value, timestamp) 
+            VALUES (%s,%s,%s)''', (data['key'], data['value'], data['ts'],))
+            # Commit your changes in the database
+            self.connection.commit()
+            print("Records inserted........")
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
