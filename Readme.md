@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 I have tested it in windows 10 environment and installed PostgreSQL 13.
 
-I have made database.ini file to put all PostgreSQL params and used it to connect
+I have made "database.ini" file to put all PostgreSQL params and used it to connect
 the database
 
 ini file contains:
@@ -40,7 +40,7 @@ Structure of the generated data is :
 
 ***File of Json Array***
 
-I have made a json file file.json, which contains array of json objects.
+I have made a json file "file.json", which contains array of json objects.
 
 For the testing purpose I am using this file read scenario. This scenario will be reading the
 file content and transmit the data one by one to sink.
