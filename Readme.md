@@ -33,6 +33,11 @@ Simulator will generate a new record everytime, when source parameter is simulat
 It will generate a single record and either show up in the console or get inserted into the database
 according to sink parameter
 
+Structure of the generated data is :
+
+{"key": "A123", "value":"15.6", "ts":'2020-10-07 13:28:43.399620+02:00'} 
+
+
 ***File of Json Array***
 
 I have made a json file file.json, which contains array of json objects.
