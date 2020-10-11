@@ -35,7 +35,7 @@ class PseudoETL:
             print(error)
 
     def start_source(self):
-        """ Responsible to source the data using generator/file
+        """ Responsible to source the data using simulator/file
         """
         try:
             if self.source == SourceMode.SIMULATOR:
