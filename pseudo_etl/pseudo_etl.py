@@ -20,7 +20,7 @@ class PseudoETL:
             if self.sink == SinkMode.CONSOLE:
                 if self.data is not None:
                     # Print the data in console
-                    print(self.data)
+                    print("Record is {}".format(self.data))
             if self.sink == SinkMode.DATABASE:
                 if self.data is not None:
                     # Insert the data in Postgresql

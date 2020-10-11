@@ -1,30 +1,38 @@
 import random
 import datetime
-import time
 import string
 import json
 
 
-def id_generator(
+def _id_generator(
         size=4,
         chars=string.ascii_uppercase + string.digits
 ):
+    """ Generate id for the data
+    """
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-def value_generator():
+def _value_generator():
+    """ Generate value for the data
+    """
     return random.uniform(10.0, 100.0)
 
 
-def time_stamp_generator():
-    return datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+def _time_stamp_generator():
+    """ Generate timestamp for the data
+    """
+    return datetime.datetime.now(datetime.timezone.utc).\
+        strftime('%Y-%m-%d %H:%M:%S.%f %z')
 
 
 def data_generator():
+    """ Generate simulated ETL data
+    """
     data = {
-        'key': id_generator(),
-        'value': value_generator(),
-        'ts': time_stamp_generator()
+        'key': _id_generator(),
+        'value': _value_generator(),
+        'ts': _time_stamp_generator()
         }
     return json.dumps(data)
 

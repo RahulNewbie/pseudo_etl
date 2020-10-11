@@ -25,6 +25,21 @@ port=5433<br/>
 
 Please change the host, port, user and password according to your installation
 
+***Simulator***
+
+Simulator will generate a new record everytime, when source parameter is simulator.
+It will generate a single record and either show up in the console or get inserted into the database
+according to sink parameter
+
+***File of Json Array***
+
+I have made a json file file.json, which contains array of json objects.
+
+For the testing I am using this file to test the file read scenario.
+
+As proper format of the file was not given, so i have used my creativity 
+to design the file as a json file.
+
 
 ***Run the Application***
 
