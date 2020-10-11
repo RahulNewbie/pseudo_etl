@@ -42,7 +42,8 @@ Structure of the generated data is :
 
 I have made a json file file.json, which contains array of json objects.
 
-For the testing I am using this file to test the file read scenario.
+For the testing purpose I am using this file read scenario. This scenario will be reading the
+file content and transmit the data one by one to sink.
 
 As proper format of the file was not given, so i have used my creativity 
 to design the file as a json file.
