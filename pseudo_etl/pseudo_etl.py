@@ -8,6 +8,9 @@ from utility.constant import SinkMode, SourceMode
 
 
 class PseudoETL:
+    """ Pseudo ETL class, responsible for source the data
+        and sink it to database/ console
+    """
     def __init__(self, ini_path, file_path, source, sink):
         self.database = DbModel(config(ini_path))
         self.data = None
@@ -16,6 +19,8 @@ class PseudoETL:
         self.sink = sink
 
     def start_sink(self):
+        """ Responsible to sink the data into console/ database
+        """
         try:
             if self.sink == SinkMode.CONSOLE:
                 if self.data is not None:
@@ -30,6 +35,8 @@ class PseudoETL:
             print(error)
 
     def start_source(self):
+        """ Responsible to source the data using generator/file
+        """
         try:
             if self.source == SourceMode.SIMULATOR:
                 # Simulate data to sink
@@ -44,4 +51,6 @@ class PseudoETL:
             print(error)
 
     def run(self):
+        """ Responsible for running the Pseudo ETL workflow
+        """
         self.start_source()

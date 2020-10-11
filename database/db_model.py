@@ -65,6 +65,6 @@ class DbModel(object):
             VALUES (%s,%s,%s)''', (data['key'], data['value'], data['ts'],))
             # Commit changes in the database
             self.connection.commit()
-            print("Records inserted........")
+            print("Record inserted........")
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
